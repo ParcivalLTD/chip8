@@ -1,4 +1,3 @@
-```markdown
 # Chip-8 Emulator
 
 Dieses Projekt ist ein Emulator für den Chip-8, der in C# geschrieben ist. Der Chip-8 ist ein einfacher, interpretierter, portabler Computer, der in den 1970er Jahren entwickelt wurde.
@@ -38,4 +37,3 @@ Um das Projekt zu bauen, öffnen Sie die `chip-8.sln` Datei in Visual Studio und
 ## Lizenz
 
 Dieses Projekt ist unter der MIT-Lizenz lizenziert. Siehe die `LICENSE`-Datei für Details.
-```
