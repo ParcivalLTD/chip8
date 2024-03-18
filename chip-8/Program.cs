@@ -12,6 +12,19 @@ namespace chip_8
     {
         static void Main(string[] args)
         {
+            Console.WindowWidth = 32 * 8;
+            Console.WindowHeight = 32 * 8;
+
+            // Set background to white and text to black
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();
+
+            string[] gameNames = { "breakout", "pong", "sample", "spaceinvaders", "tetris" };
+            int selectedGame = DisplayGameSelectionMenu(gameNames);
+
+            string gamePath = Path.Combine("../../roms", gameNames[selectedGame] + ".ch8");
+
             IntPtr window = SDL.SDL_CreateWindow("Chip 8 Emulator", 128, 128, 64 * 8, 32 * 8, 0);
             IntPtr renderer = SDL.SDL_CreateRenderer(window, -1, SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED);
 
@@ -21,7 +34,7 @@ namespace chip_8
 
             CPU cpu = new CPU();
 
-            BinaryReader reader = new BinaryReader(new FileStream("../../roms/tetris.ch8", FileMode.Open));
+            BinaryReader reader = new BinaryReader(new FileStream(gamePath, FileMode.Open));
             List<byte> program = new List<byte>();
 
             while (reader.BaseStream.Position < reader.BaseStream.Length)
@@ -120,6 +133,17 @@ namespace chip_8
 
             SDL.SDL_DestroyRenderer(renderer);
             SDL.SDL_DestroyWindow(window);
+        }
+
+        private static int DisplayGameSelectionMenu(string[] gameNames)
+        {
+            Console.WriteLine("Select a game:");
+            for (int i = 0; i < gameNames.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {gameNames[i]}");
+            }
+            int choice = int.Parse(Console.ReadLine()) - 1;
+            return choice;
         }
 
         private static int KeyCodeToKey(int keycode)
