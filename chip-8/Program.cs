@@ -12,18 +12,11 @@ namespace chip_8
     {
         static void Main(string[] args)
         {
-            Console.WindowWidth = 32 * 8;
-            Console.WindowHeight = 32 * 8;
-
-            // Set background to white and text to black
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.Clear();
 
             string[] gameNames = { "breakout", "pong", "sample", "spaceinvaders", "tetris" };
             int selectedGame = DisplayGameSelectionMenu(gameNames);
 
-            string gamePath = Path.Combine("../../roms", gameNames[selectedGame] + ".ch8");
+            string gamePath = Path.Combine("./roms", gameNames[selectedGame] + ".ch8");
 
             IntPtr window = SDL.SDL_CreateWindow("Chip 8 Emulator", 128, 128, 64 * 8, 32 * 8, 0);
             IntPtr renderer = SDL.SDL_CreateRenderer(window, -1, SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED);
